@@ -22,7 +22,7 @@ int main() {
     userAccount accts[20];
 
     // instruction
-    cout << "Please enter information to database like this: <username> <nationality> <age> <accountBalance>, and separate each new user using ENTER" << endl;
+    cout << "Please enter information to database like this: <username> <nationality> <age> <accountBalance>, and separate each new user each line" << endl;
 
     // read in user name and age into struct
     string name, nationality;
@@ -36,7 +36,7 @@ int main() {
     int swedishUser = 0;
     bool istherezoomer = false;
 
-    while (cin >> accts[20] >> age) {
+    while (userCount < 20 && cin >> name >> nationality >> age >> accountBalance) {
         // store user infomration in struct
         accts[userCount].username = name;
         accts[userCount].nationality = nationality;
@@ -59,11 +59,17 @@ int main() {
         userCount++;
     }
 
-    //output user information
-    cout << "User Information:" << endl;
-    
-    
+    // Output questions and answers
+    cout << "Q: What is the highest account balance among all users?" << endl;
+    cout << "A: $" << highestBalance << endl;
+
+    cout << "Q: What's the sum of account balance of all users?" << endl;
+    cout << "A: $" << sumBalance << endl;
+
+    cout << "Q: How many users come from Sweden?" << endl;
+    cout << "A: " << swedishUser << endl;
+
+    cout << "Q: Do we have any user younger than 21?" << endl;
+    // cout << "A: " << istherezoomer == true 
     return 0;
 };
-
-

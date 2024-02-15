@@ -2,5 +2,5 @@
 
 int main() {
     std::cout << "Welcome to C++\n";
-    return 0
+    return 0;
 }
