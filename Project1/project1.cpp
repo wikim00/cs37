@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip> // set precision
 using namespace std;
 
 //initialize float variable to track the highest balance
@@ -31,10 +32,10 @@ int main() {
     int userCount = 0;
 
     // storage variables
-    float highestBalance = 0.0;
-    float sumBalance = 0.0;
+    float highestBalance = 0.00;
+    float balanceSum = 0.00;
     int swedishUser = 0;
-    bool istherezoomer = false;
+    bool iszoomer = false;
 
     while (userCount < 20 && cin >> name >> nationality >> age >> accountBalance) {
         // store user infomration in struct
@@ -44,15 +45,19 @@ int main() {
         accts[userCount].accountBalance = accountBalance;
         
        //update totals
-       sumBalance += accountBalance;
+       balanceSum += accountBalance;
        if(accountBalance > highestBalance) {
         highestBalance = accountBalance;
-       } //if there's a swedish person, add to the count
+       } 
+       
+       //if there's a swedish person, add to the count
        if(nationality == "Swedish"){
         swedishUser++;
-       } //if there's anyone under 21, make true
+       } 
+       
+       //if there's anyone under 21, make true
        if(age < 21) {
-        istherezoomer = true;
+        iszoomer = true;
        }
        
        // add one to total of users
@@ -61,15 +66,16 @@ int main() {
 
     // Output questions and answers
     cout << "Q: What is the highest account balance among all users?" << endl;
-    cout << "A: $" << highestBalance << endl;
+    cout << "A: $" << fixed << setprecision(2) << highestBalance << endl; //setprecision 2 for 2 decimal places
+    
 
     cout << "Q: What's the sum of account balance of all users?" << endl;
-    cout << "A: $" << sumBalance << endl;
+    cout << "A: $" << fixed << setprecision(2) << balanceSum << endl;
 
     cout << "Q: How many users come from Sweden?" << endl;
     cout << "A: " << swedishUser << endl;
 
     cout << "Q: Do we have any user younger than 21?" << endl;
-    // cout << "A: " << istherezoomer == true 
+    cout << "A: " << (iszoomer ? "Yes" : "No") << endl;
     return 0;
 };
