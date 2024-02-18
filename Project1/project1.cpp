@@ -1,3 +1,11 @@
+/*William Kim
+Assignment: Project 1
+Date: 02/18/2024
+Create structureto read inputs and get user information
+and then output total accountBalance, highest bank account,
+# of swedish people, and if there is anyone younger than 21 
+*/
+
 #include <iostream>
 #include <string>
 #include <iomanip> // set precision
