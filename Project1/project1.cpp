@@ -8,10 +8,8 @@ and then output total accountBalance, highest bank account,
 
 #include <iostream>
 #include <string>
-#include <iomanip> // set precision
+#include <iomanip> // get setprecision ability
 using namespace std;
-
-//initialize float variable to track the highest balance
 
 //structure creates an object i guess to store information in an
 // organized fashion
