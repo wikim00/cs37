@@ -144,6 +144,7 @@ int main() {
     report << "Loaded mech with " << microMissiles << " micro missiles and the defense matrix with power " << defenseMatrix << endl;
     report << "Ready for combat!";
     //close file
-
+    report.close();
+    
     return 0;
 }
