@@ -3,8 +3,27 @@
 #include <string>
 #include <cmath>
 #include <cstdlib> // Include for proper file handling
+#include <algorithm> // copy_n function
 using namespace std;
-//read combat data and then adjust dva to defeat her enemies
+
+//class to contain bots and their functions
+class Battle {
+private:
+    //initialize botsPower and botsCount
+    int botsPower[10], botsCount; 
+    float bossPower;
+
+public:
+    //constructor
+    dvaBattle(int botsPower[], int botsCount, float bossPower);
+
+    
+};
+
+//class to contain mech and functions
+class Mech {
+
+};
 
 //matrix_power function will take in bots' power, number of bots, and boss's power
 //and calculate how much defense matrix dva needs
@@ -90,6 +109,10 @@ int main() {
     float bossPower;
     combatFile >> bossPower;
     cout << "boss power: " << bossPower << endl;
+
+    //initialize battle and dva class
+    Battle dvaBattle(botsPower[i], botsCount, bossPower);
+    Mech dva;
 
     //read microMissiles and defenseMatrix 
     int microMissiles;
