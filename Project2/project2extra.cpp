@@ -41,9 +41,18 @@ private:
     int microMissiles;
 
 public:
-    Mech(float defenseMatrix, int microMissiles) : 
-    defenseMatrix(defenseMatrix), microMissiles(microMissiles) {}
+    Mech(float defenseMatrix, int microMissiles) {
+        this->defenseMatrix = defenseMatrix;
+        this->microMissiles = microMissiles;
+    }
 
+     float getDefenseMatrix() const {
+        return defenseMatrix;
+    }
+
+    int getMicroMissiles() const {
+        return microMissiles;
+    }
 
     float micro_missile(Battle &battle) {
         //micro missile = 2*Sum(botsPower) + 5*bossPower
@@ -103,14 +112,13 @@ int main() {
     cout << "boss power: " << bossPower << endl;
 
     //initialize battle and dva class
-    Battle dvaBattle(botsPower[], botsCount, bossPower);
+    Battle dvaBattle(botsPower, botsCount, bossPower);
     Mech dva(100.0, 10);
 
     //calculate power needed
     float matrixPowerRequired = dvaBattle.matrix_power();
     float missilePowerRequired = dva.micro_missile(dvaBattle);
-
-
+    
     //4. Report
     //use ofstream to open file
     ofstream report("report.txt");
@@ -124,7 +132,7 @@ int main() {
     //write to file
     report << "D.Va's Combat Report" << endl;
     report << "Combat with " << botsCount << " enemy bots and one enemy boss with power " << bossPower << endl;
-    report << "Loaded mech with " << dva.microMissiles << " micro missiles and the defense matrix with power " << dva.defenseMatrix << endl;
+    report << "Loaded mech with " << dva.getMicroMissiles << " micro missiles and the defense matrix with power " << dva.getDefenseMatrix << endl;
     report << "Ready for combat!";
     //close file
     report.close();
