@@ -7,7 +7,9 @@
 using namespace std;
 
 //class to contain bots and their functions
-class Battle {
+class Battle {  
+friend class Mech;
+
 private:
     //initialize botsPower and botsCount
     int botsPower[10], botsCount; 
@@ -15,68 +17,58 @@ private:
 
 public:
     //constructor
-    dvaBattle(int botsPower[], int botsCount, float bossPower);
+    Battle(int botsPower[], int botsCount, float bossPower) {
+        copy_n(botsPower, botsCount, this->botsPower);
+        this->botsCount = botsCount;
+        this->bossPower = bossPower;
+    };
 
-    
+    //calculate total matrix power required
+    float matrix_power(int botsPower[], int botsCount, float bossPower) {
+        float sum = 0;
+        for (int i = 0; i < botsCount; i++)
+        {
+            sum += botsPower[i];
+        }
+        return sum + bossPower; 
+    };
 };
 
 //class to contain mech and functions
 class Mech {
+private:
+    float defenseMatrix;
+    int microMissiles;
 
+public:
+    Mech(float defenseMatrix, int microMissiles) : 
+    defenseMatrix(defenseMatrix), microMissiles(microMissiles) {}
+
+
+    float micro_missile(Battle &battle) {
+        //micro missile = 2*Sum(botsPower) + 5*bossPower
+        float sum = 0;
+        for (int i = 0; i < battle.botsCount; i++) {
+            sum += battle.botsPower[i];
+        }
+        return 2 * sum + 5 * battle.bossPower;
+    };
+
+    void load(float matrixPowerRequired, float missilePowerRequired){
+        //overwrite class member if "required" is greater than default
+        if(matrixPowerRequired > defenseMatrix)
+        {
+            defenseMatrix = matrixPowerRequired;
+        }
+        
+        missilePowerRequired = ceil(missilePowerRequired / 60);
+        if (microMissiles < missilePowerRequired)
+        {
+            microMissiles = missilePowerRequired;
+        }
+
+    }
 };
-
-//matrix_power function will take in bots' power, number of bots, and boss's power
-//and calculate how much defense matrix dva needs
-float matrix_power(int botsPower[], int botsCount, float bossPower) {
-    float sum = 0;
-    for (int i = 0; i < botsCount; i++)
-    {
-        sum += botsPower[i];
-    }
-    sum += bossPower;
-    return sum; //return statement
-}
-
-//single_missile power function takes in an integer or float as a parameter
-//using template convert to the appropriate unit
-template <typename U>
-U single_missile_power(U a)
-{
-    //if a <= 15 return 2x
-    if (a <= 15)
-    {
-        return a * 2;
-    }
-
-    //if a > 15 return 5x
-    else if (a > 15)
-    {
-        return a * 5;
-    }
-}
-
-//function overloading load_dva to see how much defense matrix and missiles D.Va needs
-void load_dva(float& defenseMatrix, float& matrixPowerRequired) 
-{
-    //pass by reference for this function
-    if (defenseMatrix < matrixPowerRequired)
-    {
-        defenseMatrix = matrixPowerRequired;
-    }
-
-}
-
-void load_dva(int& microMissiles, float& missilePowerRequired)
-{
-    //pass in by reference
-    //make missile power required and divide it to 60 to make it compatible
-    missilePowerRequired = ceil(missilePowerRequired / 60);
-    if (microMissiles < missilePowerRequired)
-    {
-        microMissiles = missilePowerRequired;
-    }
-
-}
 
 int main() {
 
@@ -111,44 +103,13 @@ int main() {
     cout << "boss power: " << bossPower << endl;
 
     //initialize battle and dva class
-    Battle dvaBattle(botsPower[i], botsCount, bossPower);
-    Mech dva;
+    Battle dvaBattle(botsPower[], botsCount, bossPower);
+    Mech dva(100.0, 10);
 
-    //read microMissiles and defenseMatrix 
-    int microMissiles;
-    float defenseMatrix;
-    combatFile >> microMissiles;
-    combatFile >> defenseMatrix;
-    cout << "# of micro missiles: " << microMissiles << endl;
-    cout << "defense matrix: " << defenseMatrix << endl;
+    //calculate power needed
+    float matrixPowerRequired = dvaBattle.matrix_power();
+    float missilePowerRequired = dva.micro_missile(dvaBattle);
 
-    //calculate and load defense matrix
-    float matrixPowerRequired = matrix_power(botsPower, botsCount, bossPower);
-    cout << "matrix power required: " << matrixPowerRequired << endl;
-    
-    //2. Load Micro Missiles
-    //single missile power
-    float missilePowerRequired = 0;
-    
-    //add up the single missile power of each bot in the array
-    for(i = 0; i < botsCount; i++)
-    {
-    missilePowerRequired += single_missile_power(botsPower[i]);
-    cout << "single missile power for bot# "<< single_missile_power(botsPower[i]) << endl;
-    }
-
-    //add up the bosses power up
-    cout << "missile power for boss "<< single_missile_power(bossPower) << endl;
-    missilePowerRequired += single_missile_power(bossPower);
-    cout << "total missile power required: " << missilePowerRequired << endl;
-
-    //3. Load D.VA
-
-    //take in defense Matrix by reference and matrxiPowerRequired by value
-    load_dva(defenseMatrix, matrixPowerRequired);
-    load_dva(microMissiles, missilePowerRequired);
-    cout << "loaded defense matrix: " << defenseMatrix << " loaded matrix power required: " << matrixPowerRequired << endl;
-    cout << "loaded micro missiles: " << microMissiles << " loaded missile power required: " << missilePowerRequired << endl;
 
     //4. Report
     //use ofstream to open file
@@ -163,7 +124,7 @@ int main() {
     //write to file
     report << "D.Va's Combat Report" << endl;
     report << "Combat with " << botsCount << " enemy bots and one enemy boss with power " << bossPower << endl;
-    report << "Loaded mech with " << microMissiles << " micro missiles and the defense matrix with power " << defenseMatrix << endl;
+    report << "Loaded mech with " << dva.microMissiles << " micro missiles and the defense matrix with power " << dva.defenseMatrix << endl;
     report << "Ready for combat!";
     //close file
     report.close();
