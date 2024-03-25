@@ -12,25 +12,32 @@ friend class Mech;
 
 private:
     //initialize botsPower and botsCount
-    int botsPower[10], botsCount; 
+    int *botsPower;
+    int botsCount; 
     float bossPower;
 
 public:
     //constructor
     Battle(int botsPower[], int botsCount, float bossPower) {
+        this->botsPower = new int[botsCount];
         copy_n(botsPower, botsCount, this->botsPower);
         this->botsCount = botsCount;
         this->bossPower = bossPower;
     };
 
+     ~Battle() {
+        delete[] botsPower; // Deallocate memory in the destructor
+    }
+
     //calculate total matrix power required
-    float matrix_power(int botsPower[], int botsCount, float bossPower) {
+    float matrix_power() {
         float sum = 0;
         for (int i = 0; i < botsCount; i++)
         {
             sum += botsPower[i];
         }
-        return sum + bossPower; 
+        sum = sum + bossPower;
+        return sum;
     };
 };
 
@@ -44,14 +51,6 @@ public:
     Mech(float defenseMatrix, int microMissiles) {
         this->defenseMatrix = defenseMatrix;
         this->microMissiles = microMissiles;
-    }
-
-     float getDefenseMatrix() const {
-        return defenseMatrix;
-    }
-
-    int getMicroMissiles() const {
-        return microMissiles;
     }
 
     float micro_missile(Battle &battle) {
@@ -76,6 +75,14 @@ public:
             microMissiles = missilePowerRequired;
         }
 
+    }
+
+    float getDefenseMatrix() const {
+        return defenseMatrix;
+    }
+
+    int getMicroMissiles() const {
+        return microMissiles;
     }
 };
 
@@ -103,13 +110,11 @@ int main() {
     for(i = 0; i < botsCount; i++)
     {
         combatFile >> botsPower[i];
-        cout << "bot #" << i << " power: " << botsPower[i] << endl; 
     }
 
     //read boss power last outside of loop
     float bossPower;
     combatFile >> bossPower;
-    cout << "boss power: " << bossPower << endl;
 
     //initialize battle and dva class
     Battle dvaBattle(botsPower, botsCount, bossPower);
@@ -132,7 +137,7 @@ int main() {
     //write to file
     report << "D.Va's Combat Report" << endl;
     report << "Combat with " << botsCount << " enemy bots and one enemy boss with power " << bossPower << endl;
-    report << "Loaded mech with " << dva.getMicroMissiles << " micro missiles and the defense matrix with power " << dva.getDefenseMatrix << endl;
+    report << "Loaded mech with " << dva.getMicroMissiles() << " micro missiles and the defense matrix with power " << matrixPowerRequired << endl;
     report << "Ready for combat!";
     //close file
     report.close();
