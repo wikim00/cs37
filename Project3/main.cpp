@@ -5,7 +5,7 @@ using namespace std;
 
 // overloaded stream-insertion operator
 // non member function via friend
-ostream operator<< (ostream& os, const Minion&)
+ostream operator<< (ostream &os, const Minion &name, const Minion &height, const Minion &height, const Minion &bananasOwned)
 {
   os << "The minion " << minion.name << "is " << minion.height << " inches tall, has "
   << minion.eyes << " eye(s), and owns " << minion.bananasOwned << " banana(s)." << endl;
@@ -13,7 +13,7 @@ ostream operator<< (ostream& os, const Minion&)
 }
 
 // overloaded stream-insertion operator
-istream operator>> (istream&, Minion&)
+istream operator>> (istream &nput, Minion&)
 {
 
 }

@@ -23,12 +23,12 @@ Minion::Minion(string name, float height, int eyes, int bananasOwned) {
 
 //define functions
 int Minion::getBananas() const
-{
+{   //const lets us access bananas owned
     return bananasOwned;
 }
 
 string Minion::getName() const
-{
+{   //const lets us access name
     return name;
 }
 
@@ -38,6 +38,7 @@ void Minion::printMinionCount()
 }
 
 //define overloaded operators
+//comparing heights operators
 bool Minion::operator>(const Minion &other) const 
 {
     //if current height > compared height then TRUE
@@ -49,3 +50,4 @@ bool Minion::operator<(const Minion &other) const
     //if current is shorter than compared then TRUE
     return height < other.height;
 }
+
