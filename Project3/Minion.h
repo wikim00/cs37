@@ -27,7 +27,7 @@ private:
 public:
     //constructor
     Minion(string name, float height, int eyes, int bananasOwned);
-    
+
     //initialize function
     int getBananas() const;
     string getName() const;
@@ -41,6 +41,8 @@ public:
     bool operator<(const Minion &other) const;
     Minion &operator++();   //preincrement
     Minion operator++(int); //postincrement
+
+    ~Minion(); //destructor
 };
 
 #endif // MINION_H_INCLUDED

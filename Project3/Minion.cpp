@@ -6,11 +6,12 @@
 #include "Minion.h"
 #include <string>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 // initialize static member variable
-int Minion::minionCount = 0;
+int Minion::minionCount = 1;
 
 // constructor definition
 Minion::Minion(string name, float height, int eyes, int bananasOwned) {
@@ -19,6 +20,10 @@ Minion::Minion(string name, float height, int eyes, int bananasOwned) {
     this->eyes = eyes;
     this->bananasOwned = bananasOwned;
     minionCount++; // Increment minionCount every time a new Minion object is created
+}
+
+Minion::~Minion () {
+    minionCount--;
 }
 
 //define functions

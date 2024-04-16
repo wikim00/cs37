@@ -36,7 +36,7 @@ int main()
 {
 
   // declare minion objects
-  Minion minion1("Kevin", 38, 2, 1); 
+  Minion minion1("", 0.0f, 0, 0); 
   Minion minion2("", 0.0f, 0, 0);
   Minion minion3("", 0.0f, 0, 0);
 
