@@ -11,8 +11,8 @@
 using namespace std;
 
 class Minion {  
-friend ostream operator<< (ostream&, Student&);
-friend istream operator>> (istream&, Student&);
+friend ostream& operator<< (ostream&, const Minion&);
+friend istream& operator>> (istream&, Minion&);
 
 private:
     //private attributes
@@ -26,16 +26,21 @@ private:
 
 public:
     //constructor
-    Minion::Minion(string name, float height, int eyes, int bananasOwned);
+    Minion(string name, float height, int eyes, int bananasOwned);
     
     //initialize function
     int getBananas() const;
     string getName() const;
+    float getHeight();
+    int getEyes();
+    int getBananasOwned();
     static void printMinionCount();
 
     //overload operator(it's like a function)
     bool operator>(const Minion &other) const;
     bool operator<(const Minion &other) const;
+    Minion &operator++();   //preincrement
+    Minion operator++(int); //postincrement
 };
 
 #endif // MINION_H_INCLUDED

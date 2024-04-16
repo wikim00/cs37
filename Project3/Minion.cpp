@@ -32,6 +32,19 @@ string Minion::getName() const
     return name;
 }
 
+// Member functions to access private attributes
+float Minion::getHeight()  {
+    return height;
+}
+
+int Minion::getEyes()  {
+    return eyes;
+}
+
+int Minion::getBananasOwned()  {
+    return bananasOwned;
+}
+
 void Minion::printMinionCount() 
 {
   cout << minionCount << " minions created." << endl;
@@ -51,3 +64,15 @@ bool Minion::operator<(const Minion &other) const
     return height < other.height;
 }
 
+// preincrement
+Minion& Minion::operator++() {
+    ++bananasOwned;
+    return *this;
+}
+
+// postincrement
+Minion Minion::operator++(int) {
+    Minion temp = *this;
+    ++(*this);  // Call the pre-increment operator to increase bananasOwned
+    return temp;
+}
