@@ -74,5 +74,6 @@
         "numbers": "cpp",
         "span": "cpp",
         "execution": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }
