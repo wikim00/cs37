@@ -1,8 +1,8 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
+#include <iostream>
 #include <string>
-#include "DeliveryOrder.h"
 
 using namespace std;
 
@@ -12,10 +12,24 @@ private:
     string status;
 
 public:
-    Account(const string& username, const string& status = "Regular");
-    ~Account();
-    float applyDiscount();
-    string getStatus() const;
+    //constructor should add to parameter string shopName
+    Account(string username, string status = "Regular")
+    {
+        this->username = username;
+        this->status = status;
+    };
+
+    //destructor
+    ~Account()
+    {
+        cout << "Account removed. \n";
+    }
+
+    //functions
+    string getStatus() const
+    {
+        return status;
+    }
 };
 
 #endif // ACCOUNT_H

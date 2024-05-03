@@ -6,20 +6,23 @@
 
 using namespace std;
 
+// bobaOrder public inherit DeliveryOrder
 class BobaOrder : public DeliveryOrder {
 private:
     string shopName;
-    int drinksCount;
+    int static drinksCount;
 
 public:
-    BobaOrder(const string& name, const string& date, 
-    const string& phone, float miles, const string& shopName);
+    //constructor should add to parameter string shopName
+    BobaOrder(string, string, string, float, string shopName);
 
+    //destructor
     ~BobaOrder();
 
+    //functions
     void receipt() const;
     float VIPdiscount() const override;
-    void addDrink(string& drink, bool addBoba = true, int count = 1);
+    void addDrink(string drink, bool addBoba = true, int count = 1);
 };
 
 #endif // BOBAORDER_H

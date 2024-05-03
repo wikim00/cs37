@@ -6,16 +6,20 @@ using namespace std;
 //initialize static member variables
 const float DeliveryOrder::taxRate = 0.09;
 const float DeliveryOrder::deliveryRate = 2.0;
+int DeliveryOrder::orderCount = 0;
 
+//constructor definition
 DeliveryOrder::DeliveryOrder(string name, string date, string phone, float miles, float orderBalance)
 {
     this->name = name;
     this->date = date;
     this->phone = phone;
     this->miles = miles;
-    this->orderBalance = orderBalance;
+    orderBalance = 0;
     orderCount++;
 }
+
+//destructor definition
 DeliveryOrder::~DeliveryOrder() {
     // Optionally print a message when object is destroyed
     cout << "DeliveryOrder destroyed.\n";
@@ -36,4 +40,3 @@ float DeliveryOrder::getTotalBalance() const {
 int DeliveryOrder::getOrderCount() {
     return orderCount;
 }
-
