@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//initialize static member varibale
+//initialize static member variable
 int BobaOrder::drinksCount = 0;
 
 //constructor definition
@@ -25,28 +25,25 @@ void BobaOrder::receipt() const
 {
     // use DeliveryOrder Function
     DeliveryOrder::receipt();
-    drinksCount++;
     cout << "\tDrinks Count: " << drinksCount << endl;
 }
 
 //unfinished function
 void BobaOrder::addDrink(string drink, bool addBoba, int count) {
     // Calculate cost based on drink type
-    float drinkCost = 0.0;
+    float drinkCost = 0.00;
     if (drink == "Green Tea Latte")
-        drinkCost = 5.8;
+        drinkCost = 5.80;
     else if (drink == "Brown Sugar Boba Milk")
-        drinkCost = 7.8;
+        drinkCost = 7.80;
     else if (drink == "Brown Sugar Pearl Milk")
-        drinkCost = 9.8;
+        drinkCost = 9.80;
     else
         throw InvalidInput(drink); // Throw InvalidInput exception if drink is not recognized
 
     // Add cost for boba
     if (addBoba == true)
         drinkCost += 1.0;
-    else
-        drinkCost;
 
     // Add cost for the specified number of drinks
     drinkCost *= count;

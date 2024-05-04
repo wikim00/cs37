@@ -6,11 +6,11 @@
 
 using namespace std;
 
-
+// food order public inherit delivery order
 class FoodOrder : public DeliveryOrder {
 private:
     string restaurantName;
-    int foodCount;
+    int static foodCount;
 
 public:
     //constructor should add to parameter string shopName
@@ -22,7 +22,7 @@ public:
     //functions
     void receipt() const;
     float VIPdiscount() const override;
-    void addFood(string mainCourse, int sides, bool soup = false);
+    void addFood(string mainCourse, int sides = 0, bool soup = false);
 };
 
 #endif // FOODORDER_H

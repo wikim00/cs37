@@ -36,41 +36,42 @@ int main() {
     BobaOrder kevinOrder("Kevin", "04/20/2024", "123-456-0000", 10.4, "M Tea");
     try {
         kevinOrder.addDrink("Green Tea Latte");
-        kevinOrder.addDrink("Brown Sugar Pearl Milk", 0, false);
-        kevinOrder.addDrink("Brown Sugar Boba Milk", 0, false);
-        kevinOrder.addDrink("Brown Sugar Boba Milk", 0, false);
+        kevinOrder.addDrink("Brown Sugar Pearl Milk", false, 1);
+        kevinOrder.addDrink("Brown Sugar Boba Milk", false, 2);
         kevinOrder.addDrink("Iron Goddess");
     } catch (const InvalidInput e) {
+        e.reason();
         cout << "Not serving requested drinks. Drink order ignored.\n\n";
     }
-    kevinOrder.receipt();
     cout << fixed << setprecision(2);
+    kevinOrder.receipt();
     cout << "Balance: $" << kevinOrder.getTotalBalance() << endl;
     cout << "Discounted Balance: $" << applyDiscount(&kevinOrder, kevin) << endl << endl;
 
-    // // Stuart placing order
-    // cout << "Stuart is placing order.\n";
-    // FoodOrder stuartOrder("Stuart", "04/20/2024", "123-456-1111", 25.5, "Tavern Green");
-    // try {
-    //     stuartOrder.addFood("Thick Cauliflower Steaks", 1, true);
-    //     stuartOrder.addFood("Organic Scottish Salmon");
-    //     stuartOrder.addFood("Rack of Lamb", 0, true);
-    // } catch (const InvalidInput& e) {
-    //     cout << "Not serving requested food. Food order ignored.\n\n";
-    // }
-    // stuartOrder.receipt();
-    // cout << "Balance: $" << stuartOrder.getTotalBalance() << endl;
-    // cout << "Discounted Balance: $" << applyDiscount(&stuartOrder, stuart) << endl << endl;
+    // Stuart placing order
+    cout << "Stuart is placing order.\n";
+    FoodOrder stuartOrder("Stuart", "04/20/2024", "123-456-1111", 25.5, "Tavern Green");
+    try {
+        stuartOrder.addFood("Thick Cauliflower Steaks", 1, true);
+        stuartOrder.addFood("Organic Scottish Salmon");
+        stuartOrder.addFood("Rack of Lamb", 0, true);
+    } catch (const InvalidInput& e) {
+        e.reason();
+        cout << "Not serving requested food. Food order ignored.\n\n";
+    }
+    stuartOrder.receipt();
+    cout << "Balance: $" << stuartOrder.getTotalBalance() << endl;
+    cout << "Discounted Balance: $" << applyDiscount(&stuartOrder, stuart) << endl << endl;
 
-    // // Bob placing order
-    // cout << "Bob decided to log in to his account and see whether he can afford ordering the same order as Stuart.\n";
-    // stuartOrder.receipt();
-    // cout << "Balance: $" << stuartOrder.getTotalBalance() << endl;
-    // cout << "Discounted Balance: $" << applyDiscount(&stuartOrder, bob) << endl << endl;
-    // cout << "Bob upset, cancelling order :(\n\n";
+    // Bob placing order
+    cout << "Bob decided to log in to his account and see whether he can afford ordering the same order as Stuart.\n";
+    stuartOrder.receipt();
+    cout << "Balance: $" << stuartOrder.getTotalBalance() << endl;
+    cout << "Discounted Balance: $" << applyDiscount(&stuartOrder, bob) << endl;
+    cout << "Bob upset, cancelling order :(\n\n";
 
-    // // Output total order placed
-    // cout << "Total order placed: " << DeliveryOrder::getOrderCount() << ".\n\n";
+    // Output total order placed
+    cout << "Total order placed: " << DeliveryOrder::getOrderCount() << ".\n\n";
 
     return 0;
 }

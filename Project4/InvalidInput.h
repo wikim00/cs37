@@ -10,7 +10,7 @@ private:
     const string message;
 
 public:
-    InvalidInput(const std::string& input) : message("Invalid input \"" + input + "\".\n") {}
+    InvalidInput(const string& input) : message("Invalid input \"" + input + "\".\n\n") {}
 
     void reason() const {
         cout << message;
