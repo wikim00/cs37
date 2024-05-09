@@ -1,3 +1,0 @@
-
-
-#endif // DELIVERYORDER_H
