@@ -1,3 +1,4 @@
+// HW_2A
 // =============================================================================
 //
 // Programmer: William Kim
@@ -12,6 +13,100 @@
 //
 // =============================================================================
 
+// ==== Art.h ===============================================================
+#ifndef ART_H
+#define ART_H
+
+#include <string>
+using namespace std;
+
+class Art {
+protected:
+    string id;
+    string title;
+    string artist;
+    string genre;
+    int year;
+    double price;
+
+public:
+    Art(string id, string title, string artist, string genre, int year, double price)
+        : id(id), title(title), artist(artist), genre(genre), year(year), price(price) {}
+
+    virtual ~Art() {}
+    
+    virtual void showArt() const = 0; // Pure virtual function
+};
+
+#endif
+// =============================================================================
+
+// ==== Painting.h ===============================================================
+#ifndef PAINTING_H
+#define PAINTING_H
+
+#include "Art.h"
+#include <iostream>
+using namespace std;
+
+class Painting : public Art {
+private:
+    string paintMedium;
+
+public:
+    Painting(string id, string title, string artist, string genre, int year, double price, string paintMedium)
+        : Art(id, title, artist, genre, year, price), paintMedium(paintMedium) {}
+
+    ~Painting() {}
+    
+    void showArt() const override {
+        cout << "ID: " << id << endl;
+        cout << "Title: " << title << endl;
+        cout << "Artist: " << artist << endl;
+        cout << "Paint Medium: " << paintMedium << endl;
+        cout << "Genre: " << genre << endl;
+        cout << "Year: " << year << endl;
+        cout << "Price: $" << price << endl;
+    }
+};
+
+#endif
+
+// =============================================================================
+
+// ==== Sculpture.h ===============================================================
+#ifndef SCULPTURE_H
+#define SCULPTURE_H
+
+#include "Art.h"
+#include <iostream>
+using namespace std;
+
+class Sculpture : public Art {
+private:
+    string material;
+
+public:
+    Sculpture(string id, string title, string artist, string genre, int year, double price, string material)
+        : Art(id, title, artist, genre, year, price), material(material) {}
+
+    ~Sculpture() {}
+    
+    void showArt() const override {
+        cout << "ID: " << id << endl;
+        cout << "Title: " << title << endl;
+        cout << "Artist: " << artist << endl;
+        cout << "Material: " << material << endl;
+        cout << "Genre: " << genre << endl;
+        cout << "Year: " << year << endl;
+        cout << "Price: $" << price << endl;
+    }
+};
+
+#endif
+// =============================================================================
+
+// ==== Source.cpp ===============================================================
 #include "Painting.h"
 #include "Sculpture.h"
 #include <iostream>
@@ -32,7 +127,7 @@ int main() {
     return 0;
 }
 
-/* Output
+/* Output ===================================================================
 ID: 12345
 Title: The Kiss
 Artist: Gustav Klimt
@@ -49,3 +144,4 @@ Genre: Impressionism
 Year: 1880
 Price: $2000
 */
+// =============================================================================
