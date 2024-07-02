@@ -18,7 +18,7 @@ int main()
     {
         for (int i = 0; i < number; i++)
         {
-            cout << "please enter the id: "
+            cout << "please enter the id: ";
             cin >> id;
             insertItem(list, id);
         }
