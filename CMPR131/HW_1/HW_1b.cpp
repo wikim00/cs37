@@ -1,3 +1,5 @@
+// Attached: HW_1b
+// File: HW_1b.cpp
 // =============================================================================
 //
 // Programmer: William Kim
@@ -5,19 +7,23 @@
 // Instructor: Med Mogasemi
 //
 // =============================================================================
-// Program: Reverse_Order
+// Program: Reverse_Order (HW_1b)
 // =============================================================================
-// Description: This program utilizes C-strings for names and lengths
-//
+// Description: Description: This program utilizes C-strings for names and lengths
+// =============================================================================
 // =============================================================================
 
-#include <iostream>
+#include <iostream> 
 #include <cstring>  // For C-string functions like strcpy and strcat
 #include <string>   // For the C++ string class
 
 using namespace std;
 
+// ==== main ===================================================================
+//
+// =============================================================================
 int main() {
+    //size of arrays
     const int SIZE = 20;
     const int FULL_SIZE = 40;
 
@@ -39,14 +45,15 @@ int main() {
     strcat(fullName, " ");
     strcat(fullName, lastName);
 
-    // Prompt the user to enter a friend's full name
-    cout << "Enter your friend’s full name: ";
-    getline(cin, friendsName);
-
     // Display messages
     cout << "How is your love life " << fullName << "?" << endl;
     cout << "By the way, your full name has " << strlen(fullName) << " characters." << endl;
 
+    // Prompt the user to enter a friend's full name
+    cout << "Enter your friend’s full name: ";
+    getline(cin, friendsName);
+
+    // display message about friend
     cout << "How is " << friendsName << " love life " << firstAndMiddle << "?" << endl;
     cout << "By the way, your friend’s full name has " << friendsName.length() << " characters." << endl;
 
@@ -54,15 +61,24 @@ int main() {
     cin.get();
 
     return 0;
-}
+} // end of main()
+// =============================================================================
 
+
+
+
+
+
+// ==OUTPUT=======================================================================
 /*
 Enter your first and middle names: Tom
 Enter your last name: Lee
-Enter your friend’s full name: William Kim
 How is your love life Tom Lee?
 By the way, your full name has 7 characters.
+
+Enter your friend’s full name: William Kim
 How is William Kim love life Tom?
 By the way, your friend’s full name has 11 characters.
+
 Press any key to continue ...
 */
