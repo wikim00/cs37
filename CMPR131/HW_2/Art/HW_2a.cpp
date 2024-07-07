@@ -1,4 +1,5 @@
-// HW_2A
+// Attached: HW_2a
+// File: HW_2a.cpp
 // =============================================================================
 //
 // Programmer: William Kim
@@ -12,8 +13,15 @@
 //              of derived class Painting and Sculpture.
 //
 // =============================================================================
+// =============================================================================
 
-// ==== Art.h ===============================================================
+
+
+
+
+// ==== Art.h ==================================================================
+//  creates abstract base class with information about art to derive classes from
+// =============================================================================
 #ifndef ART_H
 #define ART_H
 
@@ -22,6 +30,7 @@ using namespace std;
 
 class Art {
 protected:
+    //initialize variables
     string id;
     string title;
     string artist;
@@ -36,12 +45,18 @@ public:
     virtual ~Art() {}
     
     virtual void showArt() const = 0; // Pure virtual function
-};
+}; // end of Art.h
 
 #endif
 // =============================================================================
 
+
+
+
+
 // ==== Painting.h ===============================================================
+// Derive the class from Art.h and makes it into painting. 
+// =============================================================================
 #ifndef PAINTING_H
 #define PAINTING_H
 
@@ -58,7 +73,8 @@ public:
         : Art(id, title, artist, genre, year, price), paintMedium(paintMedium) {}
 
     ~Painting() {}
-    
+
+    // overriding virtual function
     void showArt() const override {
         cout << "ID: " << id << endl;
         cout << "Title: " << title << endl;
@@ -68,13 +84,19 @@ public:
         cout << "Year: " << year << endl;
         cout << "Price: $" << price << endl;
     }
-};
+}; // end of Painting.h
 
 #endif
-
 // =============================================================================
 
+
+
+
+
+
 // ==== Sculpture.h ===============================================================
+//
+// =============================================================================
 #ifndef SCULPTURE_H
 #define SCULPTURE_H
 
@@ -92,6 +114,7 @@ public:
 
     ~Sculpture() {}
     
+    // overriding virtuatl function
     void showArt() const override {
         cout << "ID: " << id << endl;
         cout << "Title: " << title << endl;
@@ -101,20 +124,26 @@ public:
         cout << "Year: " << year << endl;
         cout << "Price: $" << price << endl;
     }
-};
+}; // end of Sculpture.h
 
 #endif
 // =============================================================================
 
+
+
+
+
+
 // ==== Source.cpp ===============================================================
+//  
+// =============================================================================
 #include "Painting.h"
 #include "Sculpture.h"
 #include <iostream>
 using namespace std;
 
-void displayArt(Art &art) {
-    art.showArt();
-}
+// function prototype
+void displayArt(Art &art);
 
 int main() {
     Painting a1("12345", "The Kiss", "Gustav Klimt", "Symbolist", 1908, 2500, "Oil");
@@ -125,9 +154,29 @@ int main() {
     displayArt(a2);
 
     return 0;
-}
+} // end of main
+// =============================================================================
+
+
+
+
+
+// ==== displayArt===============================================================
+// This function displays art by passing object to the function
+// =============================================================================
+void displayArt(Art &art) {
+    art.showArt();
+} // end of displayArt
+
+// =============================================================================
+
+
+
+
+
 
 /* Output ===================================================================
+
 ID: 12345
 Title: The Kiss
 Artist: Gustav Klimt
@@ -143,5 +192,6 @@ Material: Bronze
 Genre: Impressionism
 Year: 1880
 Price: $2000
+
 */
 // =============================================================================
