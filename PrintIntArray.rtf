@@ -1,0 +1,56 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2818
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue51;\red255\green255\blue10;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c99946\c98636\c25320;\cssrgb\c99942\c98555\c0;
+}
+\margl1440\margr1440\vieww18720\viewh18240\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26\fsmilli13333 \cf2 \expnd0\expndtw0\kerning0
+# William Kim\
+# Ch9Q1\
+# CS40A\
+\
+.text\
+PrintIntArray:\
+    addi $sp, $sp, -16     \
+    sw $ra, 0($sp)         \
+    sw $s0, 4($sp)         \
+    sw $s1, 8($sp)         \
+    sw $s2, 12($sp)        \
+\
+    move $s0, $a0          \
+    move $s1, $a1          \
+\
+    la $a0, open_bracket \
+    jal PrintString         \
+\
+    # Initialize the loop to start from the last index\
+    \cb3 addi $s2, $s1, -1      # modified to start from -1\cb1 \
+\
+loop:\
+    \cb4 blt $s2, $zero, # end_loop checks if $s2 < 0\cb1 \
+\
+    sll $t0, $s2, 2        \
+    add $t0, $t0, $s0     \
+    lw $a1, 0($t0)         \
+    la $a0, comma          \
+    jal PrintInt           \
+\
+    \cb3 addi $s2, $s2, -1      # Decrements \cb1 \
+    b loop              \
+\
+end_loop:\
+    li $v0, 4             \
+    la $a0, close_bracket  \
+    syscall                \
+\
+    # Restore registers and stack\
+    lw $ra, 0($sp)        \
+    lw $s0, 4($sp)        \
+    lw $s1, 8($sp)  \
+    lw $s2, 12($sp)       \
+    addi $sp, $sp, 16     \
+    jr $ra                }
